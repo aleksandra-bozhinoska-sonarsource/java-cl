@@ -1,0 +1,23 @@
+on:
+  # Trigger analysis when pushing to your main branches, and when creating a pull request.
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+name: Main Workflow
+jobs:
+  sonarqube:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          DYNAMIC_PROJECT_KEY: "${{ github.event.repository.name }}"
+        with:
+          args: -Dsonar.projectKey=sonarqubecloud-aleksandra-bozhinoska_java-cl -Dsonar.organization=sonarqubecloud-aleksandra-bozhinoska
