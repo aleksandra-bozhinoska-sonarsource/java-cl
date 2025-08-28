@@ -18,6 +18,6 @@ jobs:
         uses: SonarSource/sonarqube-scan-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          DYNAMIC_PROJECT_KEY: "${{ github.event.repository.name }}"
+          DYNAMIC_PROJECT_KEY: "sonarqubecloud-aleksandra-bozhinoska_${{ github.event.repository.name }}"
         with:
-          args: -Dsonar.projectKey=sonarqubecloud-aleksandra-bozhinoska_${{ github.event.repository.name }} -Dsonar.organization=sonarqubecloud-aleksandra-bozhinoska
+          args: -Dsonar.projectKey=${{ env.DYNAMIC_PROJECT_KEY }} -Dsonar.organization=sonarqubecloud-aleksandra-bozhinoska
