@@ -14,10 +14,12 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@master
+      - name: "SonarQube Scan"
+        uses: SonarSource/sonarqube-scan-action@v5.3.1
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          DYNAMIC_PROJECT_KEY: "${{ github.event.repository.name }}"
+          DYNAMIC_PROJECT_KEY: "sonarqubecloud-aleksandra-bozhinoska_${{ github.event.repository.name }}"
         with:
-          args: -Dsonar.projectKey=sonarqubecloud-aleksandra-bozhinoska_${{ github.event.repository.name }} -Dsonar.organization=sonarqubecloud-aleksandra-bozhinoska
+          projectBaseDir: .
+          args: >
+            -Dsonar.projectKey=${{ env.DYNAMIC_PROJECT_KEY }} -Dsonar.organization=sonarqubecloud-aleksandra-bozhinoska
